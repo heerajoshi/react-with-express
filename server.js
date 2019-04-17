@@ -6,6 +6,6 @@ app.get("/hello", (req, res) => {
   res.send("i am back ");
 });
 
-app.use(express.static("react-app/build"));
+app.use(express.static(__dirname + "/react-app/build"));
 
 app.listen(PORT, console.log(`listen on ${PORT}`));
