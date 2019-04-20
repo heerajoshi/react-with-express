@@ -5,10 +5,10 @@ const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 8800;
 
 const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  database: "login_users",
-  password: process.env.DB_PASSWORD
+  host: "us-cdbr-iron-east-02.cleardb.net",
+  user: "b2338a27b70736",
+  database: "heroku_8bdcf3d2b9973f0",
+  password: "eb5ad4fd"
 });
 
 const getUsers = function(req, res) {
