@@ -4,13 +4,6 @@ const app = express();
 const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 8800;
 
-// const connection = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",
-//   database: "login_users",
-//   password: "Joshiji789"
-// });
-
 const connection = mysql.createConnection({
   host: "us-cdbr-iron-east-02.cleardb.net",
   user: "b2338a27b70736",
@@ -18,6 +11,10 @@ const connection = mysql.createConnection({
   password: "eb5ad4fd"
 });
 
+connection.connect(error => {
+  if (error) throw error;
+  console.log("Connected to Database");
+});
 const getUsers = function(req, res) {
   connection.query(`select name from users`, (err, data, fields) =>
     res.send(data)
@@ -36,9 +33,13 @@ app.get("/getUsers", (req, res) => {
   getUsers(req, res);
 });
 
+app.post("/addNumber", (req, res) => {
+  
+  res.redirect("/afterAddNumber");
+});
+
 app.post("/addUser", (req, res) => {
   console.log(req.body);
-  // connection.connect();
   const addUserInDb = `insert into users (name) values (${req.body})`;
   console.log(addUserInDb);
   connection.query(addUserInDb, (error, results) => {
