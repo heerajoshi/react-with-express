@@ -4,6 +4,13 @@ const app = express();
 const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 8800;
 
+// const connection = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   database: "login_users",
+//   password: "Joshiji789"
+// });
+
 const connection = mysql.createConnection({
   host: "us-cdbr-iron-east-02.cleardb.net",
   user: "b2338a27b70736",
@@ -31,9 +38,13 @@ app.get("/getUsers", (req, res) => {
 
 app.post("/addUser", (req, res) => {
   console.log(req.body);
+  // connection.connect();
   const addUserInDb = `insert into users (name) values (${req.body})`;
+  console.log(addUserInDb);
   connection.query(addUserInDb, (error, results) => {
-    if (error) throw error;
+    if (error) {
+      console.log("this is eorr", error);
+    }
   });
   getUsers(req, res);
 });
